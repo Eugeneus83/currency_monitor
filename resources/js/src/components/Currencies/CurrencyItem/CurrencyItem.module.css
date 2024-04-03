@@ -1,0 +1,17 @@
+table {
+    width: 100%;
+}
+
+.currency {
+    justify-content: space-between;
+    margin: 1rem;
+    padding: 1rem;
+    border: 1px solid #ccc;
+    text-align: center;
+}
+
+.rate {
+    font-weight: bold;
+    color: #6b068a;
+    font-size: 1rem;
+}
