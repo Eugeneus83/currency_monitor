@@ -1,6 +1,8 @@
 ## Installation
 
 When the project is downloaded run the following commands:
+
+On Ubuntu:
 1) sudo docker-compose build app
 2) sudo docker-compose up -d
 3) sudo docker-compose exec -it currencymonitor-app && composer update && npm install && npm run dev && php artisan schedule:work
