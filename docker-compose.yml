@@ -1,0 +1,48 @@
+version: "3.7"
+services:
+  app:
+    build:
+      args:
+        user: eugene
+        uid: 1000
+      context: ./
+      dockerfile: Dockerfile
+    image: currencymonitor
+    container_name: currencymonitor-app
+    restart: unless-stopped
+    working_dir: /var/www/
+    volumes:
+      - ./:/var/www
+    networks:
+      - currencymonitor
+
+  soketi:
+    image: 'quay.io/soketi/soketi:latest-16-alpine'
+    environment:
+      SOKETI_DEBUG: '${SOKETI_DEBUG:-1}'
+      SOKETI_METRICS_SERVER_PORT: '9601'
+      SOKETI_DEFAULT_APP_ID: '${PUSHER_APP_ID}'
+      SOKETI_DEFAULT_APP_KEY: '${PUSHER_APP_KEY}'
+      SOKETI_DEFAULT_APP_SECRET: '${PUSHER_APP_SECRET}'
+    ports:
+      - '${PUSHER_PORT:-6001}:6001'
+      - '${PUSHER_METRICS_PORT:-9601}:9601'
+    networks:
+      - currencymonitor
+
+  nginx:
+    image: nginx:alpine
+    container_name: currencymonitor-nginx
+    restart: unless-stopped
+    ports:
+      - 8000:80
+    volumes:
+      - ./:/var/www
+      - ./docker-compose/nginx:/etc/nginx/conf.d/
+      - ./supervisord.conf:/etc/supervisor/conf.d/supervisord.conf
+    networks:
+      - currencymonitor
+
+networks:
+  currencymonitor:
+    driver: bridge
