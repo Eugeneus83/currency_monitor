@@ -3,9 +3,9 @@
 When the project is downloaded run the following commands:
 
 On Ubuntu:
-1) sudo docker-compose build app
+1) sudo docker-compose build
 2) sudo docker-compose up -d
-3) sudo docker-compose exec -it currencymonitor-app && composer update && npm install && npm run dev && php artisan schedule:work
+3) sudo ./docker-compose/entrypoint.sh
 
 After that you can see the running project by url: http://127.0.0.1:8000
 
