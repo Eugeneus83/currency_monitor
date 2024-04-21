@@ -1,6 +1,8 @@
 ## Installation
 
-When the project is downloaded run the following commands:
+When the project is downloaded do the following steps
+1. Rename .env.example to .env
+2. Run the following commands:
 
 On Ubuntu:
 1) sudo docker-compose build
