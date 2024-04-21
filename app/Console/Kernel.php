@@ -17,10 +17,6 @@ class Kernel extends ConsoleKernel
         //
     ];
 
-    protected $routeMiddleware = [
-        'cors'          => \App\Http\Middleware\Cors::class, // added
-    ];
-
     /**
      * Define the application's command schedule.
      *
@@ -29,7 +25,6 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
-        // $schedule->command('inspire')->hourly();
         $schedule->job(new RefreshRates)->everyFiveMinutes();
     }
 
